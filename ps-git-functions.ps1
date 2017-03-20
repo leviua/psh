@@ -17,11 +17,11 @@ function gph() {
 	  git push $args
 }
 
-function gdel() {
+function gdelAll() {
     Foreach ($br in $args)
     {
         git branch -D $br;
-        git branch -rd origin/$br;
+        git push origin :$br;
     }
 
 }
@@ -32,6 +32,10 @@ function gnew() {
 
 function gamend() {
     git commit -a --amend --no-edit $args
+}
+
+function gcherry() {
+    git cherry-pick $args
 }
 
 function gl1() {
