@@ -1,7 +1,6 @@
 function gs() {
     git status $args
 }
-
 function gbr() {
     git branch $args
 }
@@ -53,3 +52,23 @@ function gll() {
 function glx() {
 	git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cd) %C(bold blue) %an [%ae]:%Creset %n %s %n %b %n" --abbrev-commit
 }
+function Get-CurrentBranch() {
+    git rev-parse --abbrev-ref HEAD
+}
+
+function Get-LastCommitHash() {
+    git rev-parse HEAD
+}
+
+function CopyCurrentBranch() {
+    Get-CurrentBranch | clip
+    Write-Output "Current branch name copied to buffer"
+}
+
+function CopyLastCommitHahs() {
+    Get-LastCommitHash | clip
+    Write-Output "Last commit hash copied to buffer"
+}
+
+Set-Alias gccb CopyCurrentBranch
+Set-Alias gclch CopyLastCommitHahs

@@ -1,37 +1,33 @@
-Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
+# Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
 
 # Load posh-git module from current directory
 # Import-Module .\posh-git
+#git aliases
+$gitAliasses = "$Home\Documents\WindowsPowerShell\ps-git-functions.ps1";
+if (Test-Path($gitAliasses)) {
+. $Home\Documents\WindowsPowerShell\ps-git-functions.ps1
+}
 
 # If module is installed in a default location ($env:PSModulePath),
 # use this instead (see about_Modules for more information):
-Import-Module posh-git
-
-Import-Module TabExpansionPlusPlus
-Import-Module NPMTabCompletion
+# Import-Module posh-git
 
 # Set up a simple prompt, adding the git prompt parts inside git repos
-function global:prompt {
-    $realLASTEXITCODE = $LASTEXITCODE
-    $Host.UI.RawUI.ForegroundColor = "White"
 
-    Write-Host $pwd.ProviderPath -NoNewLine -ForegroundColor Green
+# function global:prompt {
+#     $realLASTEXITCODE = $LASTEXITCODE
+#     $Host.UI.RawUI.ForegroundColor = "White"
 
-    Write-VcsStatus
+#     Write-Host $pwd.ProviderPath -NoNewLine -ForegroundColor Green
 
-    Write-Host ""
-    $global:LASTEXITCODE = $realLASTEXITCODE
+#     Write-VcsStatus
 
-    Write-Host "$([char]955)" -NoNewLine -ForegroundColor "DarkGray"
-    return " "
-}
+#     Write-Host ""
+#     $global:LASTEXITCODE = $realLASTEXITCODE
 
-# Pop-Location
-
-Start-SshAgent -Quiet
-
-#git aliases
-. ./ps-git-functions.ps1
+#     Write-Host "$([char]955)" -NoNewLine -ForegroundColor "DarkGray"
+#     return " "
+# }
 
 # Chocolatey profile
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
