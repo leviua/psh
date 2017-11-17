@@ -1,26 +1,9 @@
 # Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
-# Update path for SSH (Loaded in PowerShell Profile)
-$env:path += ";" + (Get-Item "Env:ProgramFiles").Value + "\Git\bin";
-$env:path += ";" + (Get-Item "Env:ProgramFiles").Value + "\Git\usr\bin";
-
-# Load SSH agent utils
-. (Resolve-Path ~/Documents/WindowsPowershell/ssh-agent-utils.ps1)
-
-# Spoof terminal environment for git color.
-$env:TERM = 'cygwin'
-
-# Load posh-git example profile, which will setup a prompt
-#. 'C:\tools\poshgit\dahlbyk-posh-git-869d4c5\profile.example.ps1'
-
-Pop-Location
-
-Add-SshKey
 
 # Load posh-git module from current directory
-Import-Module posh-git
 #git aliases
+Import-Module posh-git
 $gitAliasses = "$Home\Documents\WindowsPowerShell\ps-git-functions.ps1";
-
 if (Test-Path($gitAliasses)) {
 . $Home\Documents\WindowsPowerShell\ps-git-functions.ps1
 }

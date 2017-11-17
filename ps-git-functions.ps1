@@ -1,11 +1,9 @@
 function gs() {
     git status $args
 }
-
 function gbr() {
     git branch $args
 }
-
 function gf() {
 	  git fetch $args
 }
@@ -62,6 +60,18 @@ function Get-LastCommitHash() {
     git rev-parse HEAD
 }
 
+function GitSandboxDeploy() {
+    $partnerSuffix = $args[0]
+    switch ($a)
+    {
+        49 { $partnerSuffix = 'sk' }
+        50 { $partnerSuffix = 'hr' }
+        51 { $partnerSuffix = 'cl' }
+    }
+    Write-Host "git fetch upstream master-$partnerSuffix --tags; git merge upstream/master-$partnerSuffix; gph --follow-tags"
+    git fetch upstream master-$partnerSuffix --tags; git merge upstream/master-$partnerSuffix; gph --follow-tags;
+}
+
 function CopyCurrentBranch() {
     Get-CurrentBranch | clip
     Write-Output "Current branch name copied to buffer"
@@ -72,5 +82,11 @@ function CopyLastCommitHahs() {
     Write-Output "Last commit hash copied to buffer"
 }
 
+function CopyLastCommitHahs() {
+    Get-LastCommitHash | clip
+    Write-Output "Last commit hash copied to buffer"
+}
+
 Set-Alias gccb CopyCurrentBranch
 Set-Alias gclch CopyLastCommitHahs
+Set-Alias gsd GitSandboxDeploy
