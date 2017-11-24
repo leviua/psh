@@ -3,6 +3,8 @@
 # Load posh-git module from current directory
 #git aliases
 Import-Module posh-git
+Import-Module TabExpansionPlusPlus
+Import-Module NPMTabCompletion
 $gitAliasses = "$Home\Documents\WindowsPowerShell\ps-git-functions.ps1";
 if (Test-Path($gitAliasses)) {
 . $Home\Documents\WindowsPowerShell\ps-git-functions.ps1
